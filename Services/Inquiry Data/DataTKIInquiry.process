@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns2="http://www.tibco.com/schemas/svcHousemaid-1/Schemas/Schema.xsd" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://www.tibco.com/schemas/svcHousemaid-1/Schemas/Schema1.xsd" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlPfx="http://xmlns.example.com/1631092950463">
+    <wsdl:import namespace="http://xmlns.example.com/1631092950463" location="/WSDLs/TKIWSDL.wsdl"/>
+    <pd:name>Services/Inquiry Data/DataTKIInquiry.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType wsMsgRef="wsdlPfx:InquiryTKIInput"/>
+    <pd:startX>151</pd:startX>
+    <pd:startY>65</pd:startY>
+    <pd:returnBindings>
+        <wsdlPfx:InquiryTKIOutput>
+            <Response>
+                <ns2:TKIDetails>
+                    <ns2:Info>
+                        <ns2:MessageCode>
+                            <xsl:value-of select="$Call-Process/wsdlPfx:InquiryTKIOutput/Response/ns2:TKIDetails/ns2:Info/ns2:MessageCode"/>
+                        </ns2:MessageCode>
+                        <ns2:Message>
+                            <xsl:value-of select="$Call-Process/wsdlPfx:InquiryTKIOutput/Response/ns2:TKIDetails/ns2:Info/ns2:Message"/>
+                        </ns2:Message>
+                    </ns2:Info>
+                    <ns2:TKIInfo>
+                        <ns2:Id>
+                            <xsl:value-of select="$Call-Process/wsdlPfx:InquiryTKIOutput/Response/ns2:TKIDetails/ns2:TKIInfo/ns2:Id"/>
+                        </ns2:Id>
+                        <ns2:NIK>
+                            <xsl:value-of select="$Call-Process/wsdlPfx:InquiryTKIOutput/Response/ns2:TKIDetails/ns2:TKIInfo/ns2:NIK"/>
+                        </ns2:NIK>
+                        <ns2:MaidCode>
+                            <xsl:value-of select="$Call-Process/wsdlPfx:InquiryTKIOutput/Response/ns2:TKIDetails/ns2:TKIInfo/ns2:MaidCode"/>
+                        </ns2:MaidCode>
+                        <ns2:Name>
+                            <xsl:value-of select="$Call-Process/wsdlPfx:InquiryTKIOutput/Response/ns2:TKIDetails/ns2:TKIInfo/ns2:Name"/>
+                        </ns2:Name>
+                        <ns2:TanggalLahir>
+                            <xsl:value-of select="$Call-Process/wsdlPfx:InquiryTKIOutput/Response/ns2:TKIDetails/ns2:TKIInfo/ns2:TanggalLahir"/>
+                        </ns2:TanggalLahir>
+                        <ns2:TempatLahir>
+                            <xsl:value-of select="$Call-Process/wsdlPfx:InquiryTKIOutput/Response/ns2:TKIDetails/ns2:TKIInfo/ns2:TempatLahir"/>
+                        </ns2:TempatLahir>
+                        <ns2:Passport>
+                            <xsl:value-of select="$Call-Process/wsdlPfx:InquiryTKIOutput/Response/ns2:TKIDetails/ns2:TKIInfo/ns2:Passport"/>
+                        </ns2:Passport>
+                        <ns2:JenisKelamin>
+                            <xsl:value-of select="$Call-Process/wsdlPfx:InquiryTKIOutput/Response/ns2:TKIDetails/ns2:TKIInfo/ns2:JenisKelamin"/>
+                        </ns2:JenisKelamin>
+                        <ns2:TinggiBadan>
+                            <xsl:value-of select="$Call-Process/wsdlPfx:InquiryTKIOutput/Response/ns2:TKIDetails/ns2:TKIInfo/ns2:TinggiBadan"/>
+                        </ns2:TinggiBadan>
+                        <ns2:BeratBadan>
+                            <xsl:value-of select="$Call-Process/wsdlPfx:InquiryTKIOutput/Response/ns2:TKIDetails/ns2:TKIInfo/ns2:BeratBadan"/>
+                        </ns2:BeratBadan>
+                        <ns2:Kewarganegaraan>
+                            <xsl:value-of select="$Call-Process/wsdlPfx:InquiryTKIOutput/Response/ns2:TKIDetails/ns2:TKIInfo/ns2:Kewarganegaraan"/>
+                        </ns2:Kewarganegaraan>
+                        <ns2:NegaraAsal>
+                            <xsl:value-of select="$Call-Process/wsdlPfx:InquiryTKIOutput/Response/ns2:TKIDetails/ns2:TKIInfo/ns2:NegaraAsal"/>
+                        </ns2:NegaraAsal>
+                        <ns2:Agama>
+                            <xsl:value-of select="$Call-Process/wsdlPfx:InquiryTKIOutput/Response/ns2:TKIDetails/ns2:TKIInfo/ns2:Agama"/>
+                        </ns2:Agama>
+                        <ns2:JumlahSaudara>
+                            <xsl:value-of select="$Call-Process/wsdlPfx:InquiryTKIOutput/Response/ns2:TKIDetails/ns2:TKIInfo/ns2:JumlahSaudara"/>
+                        </ns2:JumlahSaudara>
+                        <ns2:AnakKe>
+                            <xsl:value-of select="$Call-Process/wsdlPfx:InquiryTKIOutput/Response/ns2:TKIDetails/ns2:TKIInfo/ns2:AnakKe"/>
+                        </ns2:AnakKe>
+                        <ns2:StatusNikah>
+                            <xsl:value-of select="$Call-Process/wsdlPfx:InquiryTKIOutput/Response/ns2:TKIDetails/ns2:TKIInfo/ns2:StatusNikah"/>
+                        </ns2:StatusNikah>
+                        <ns2:JumlahAnak>
+                            <xsl:value-of select="$Call-Process/wsdlPfx:InquiryTKIOutput/Response/ns2:TKIDetails/ns2:TKIInfo/ns2:JumlahAnak"/>
+                        </ns2:JumlahAnak>
+                        <ns2:PendidikanTerakhir>
+                            <xsl:value-of select="$Call-Process/wsdlPfx:InquiryTKIOutput/Response/ns2:TKIDetails/ns2:TKIInfo/ns2:PendidikanTerakhir"/>
+                        </ns2:PendidikanTerakhir>
+                        <ns2:StatusApprove>
+                            <xsl:value-of select="$Call-Process/wsdlPfx:InquiryTKIOutput/Response/ns2:TKIDetails/ns2:TKIInfo/ns2:StatusApprove"/>
+                        </ns2:StatusApprove>
+                        <ns2:ApprovedBy>
+                            <xsl:value-of select="$Call-Process/wsdlPfx:InquiryTKIOutput/Response/ns2:TKIDetails/ns2:TKIInfo/ns2:ApprovedBy"/>
+                        </ns2:ApprovedBy>
+                        <ns2:ApprovedDate>
+                            <xsl:value-of select="$Call-Process/wsdlPfx:InquiryTKIOutput/Response/ns2:TKIDetails/ns2:TKIInfo/ns2:ApprovedDate"/>
+                        </ns2:ApprovedDate>
+                        <ns2:Catatan>
+                            <xsl:value-of select="$Call-Process/wsdlPfx:InquiryTKIOutput/Response/ns2:TKIDetails/ns2:TKIInfo/ns2:Catatan"/>
+                        </ns2:Catatan>
+                        <ns2:IdGroup>
+                            <xsl:value-of select="$Call-Process/wsdlPfx:InquiryTKIOutput/Response/ns2:TKIDetails/ns2:TKIInfo/ns2:IdGroup"/>
+                        </ns2:IdGroup>
+                    </ns2:TKIInfo>
+                </ns2:TKIDetails>
+            </Response>
+        </wsdlPfx:InquiryTKIOutput>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType wsMsgRef="wsdlPfx:InquiryTKIOutput"/>
+    <pd:endX>478</pd:endX>
+    <pd:endY>66</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1631600575734</pd:targetNamespace>
+    <pd:activity name="Call Process">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>310</pd:x>
+        <pd:y>66</pd:y>
+        <config>
+            <processName>/Processes/Inquiry Data/TKIDetails.process</processName>
+        </config>
+        <pd:inputBindings>
+            <wsdlPfx:InquiryTKIInput>
+                <Request>
+                    <ns:TKI>
+                        <ns:Maid_code>
+                            <xsl:value-of select="$Start/wsdlPfx:InquiryTKIInput/Request/ns:TKI/ns:Maid_code"/>
+                        </ns:Maid_code>
+                    </ns:TKI>
+                </Request>
+            </wsdlPfx:InquiryTKIInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>Call Process</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Call Process</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

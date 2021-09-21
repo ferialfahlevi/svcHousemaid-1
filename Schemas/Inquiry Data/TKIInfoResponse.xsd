@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="http://www.tibco.com/schemas/svcHousemaid-1/Schemas/Schema.xsd"
+	 targetNamespace="http://www.tibco.com/schemas/svcHousemaid-1/Schemas/Schema.xsd"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:element name="TKIDetails">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Info"/>
+				<xs:element ref="TKIInfo"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Name" type="xs:string"/>
+	<xs:element name="TKICode" type="xs:string"/>
+	<xs:element name="TempatLahir" type="xs:string"/>
+	<xs:element name="TanggalLahir" type="xs:string"/>
+	<xs:element name="Message" type="xs:string"/>
+	<xs:element name="MessageCode" type="xs:string"/>
+	<xs:element name="Info">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="MessageCode"/>
+				<xs:element ref="Message"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TKIInfo">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Id"/>
+				<xs:element ref="NIK"/>
+				<xs:element ref="MaidCode"/>
+				<xs:element ref="Name"/>
+				<xs:element ref="TanggalLahir"/>
+				<xs:element ref="TempatLahir"/>
+				<xs:element ref="Passport"/>
+				<xs:element ref="JenisKelamin"/>
+				<xs:element ref="TinggiBadan"/>
+				<xs:element ref="BeratBadan"/>
+				<xs:element ref="Kewarganegaraan"/>
+				<xs:element ref="NegaraAsal"/>
+				<xs:element ref="Agama"/>
+				<xs:element ref="JumlahSaudara"/>
+				<xs:element ref="AnakKe"/>
+				<xs:element ref="StatusNikah"/>
+				<xs:element ref="JumlahAnak"/>
+				<xs:element ref="PendidikanTerakhir"/>
+				<xs:element ref="StatusApprove"/>
+				<xs:element ref="ApprovedBy"/>
+				<xs:element ref="ApprovedDate"/>
+				<xs:element ref="Catatan"/>
+				<xs:element ref="IdGroup"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Passport" type="xs:string"/>
+	<xs:element name="JenisKelamin" type="xs:string"/>
+	<xs:element name="TinggiBadan" type="xs:string"/>
+	<xs:element name="BeratBadan" type="xs:string"/>
+	<xs:element name="Kewarganegaraan" type="xs:string"/>
+	<xs:element name="NegaraAsal" type="xs:string"/>
+	<xs:element name="Agama" type="xs:string"/>
+	<xs:element name="JumlahSaudara" type="xs:string"/>
+	<xs:element name="AnakKe" type="xs:string"/>
+	<xs:element name="StatusNikah" type="xs:string"/>
+	<xs:element name="JumlahAnak" type="xs:string"/>
+	<xs:element name="PendidikanTerakhir" type="xs:string"/>
+	<xs:element name="StatusApprove" type="xs:string"/>
+	<xs:element name="ApprovedBy" type="xs:string"/>
+	<xs:element name="ApprovedDate" type="xs:string"/>
+	<xs:element name="Catatan" type="xs:string"/>
+	<xs:element name="IdGroup" type="xs:string"/>
+	<xs:element name="Id" type="xs:string"/>
+	<xs:element name="NIK" type="xs:string"/>
+	<xs:element name="MaidCode" type="xs:string"/>
+</xs:schema>

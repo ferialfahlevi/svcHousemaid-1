@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns:ns2="http://www.tibco.com/schemas/svcHousemaid-1/Schemas/Schema.xsd" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://www.tibco.com/schemas/svcHousemaid-1/Schemas/Schema1.xsd" xmlns:ns4="http://www.tibco.com/schemas/svcHousemaid-1/Schemas/Insert Data/Schema1.xsd" xmlns:ns3="http://www.tibco.com/schemas/svcHousemaid-1/Schemas/Insert Data/Schema.xsd" xmlns:tns="http://xmlns.example.com/1631092950463" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://xmlns.example.com/1631092950463">
+    <import namespace="http://www.tibco.com/schemas/svcHousemaid-1/Schemas/Schema1.xsd" location="../Schemas/Inquiry Data/TKIInfoRequest.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/svcHousemaid-1/Schemas/Schema.xsd" location="../Schemas/Inquiry Data/TKIInfoResponse.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/svcHousemaid-1/Schemas/Insert Data/Schema.xsd" location="../Schemas/Insert Data/Insert TKI/InsertTKIRequest.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/svcHousemaid-1/Schemas/Insert Data/Schema1.xsd" location="../Schemas/Insert Data/Insert TKI/InsertTKIResponse.xsd"/>
+    <message name="InquiryTKIInput">
+        <part name="Request" element="ns:TKI"/>
+    </message>
+    <message name="InquiryTKIOutput">
+        <part name="Response" element="ns2:TKIDetails"/>
+    </message>
+    <message name="InsertTKIInput">
+        <part name="Request" element="ns3:InsertTKIRequest"/>
+    </message>
+    <message name="InsertTKIOutput">
+        <part name="Response" element="ns4:InsertTKIResponse"/>
+    </message>
+    <portType name="PortType">
+        <operation name="op_inquiryTKI">
+            <input message="tns:InquiryTKIInput"/>
+            <output message="tns:InquiryTKIOutput"/>
+        </operation>
+        <operation name="op_insertTKI">
+            <input message="tns:InsertTKIInput"/>
+            <output message="tns:InsertTKIOutput"/>
+        </operation>
+    </portType>
+</definitions>

@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:ns2="http://www.tibco.com/schemas/svcHousemaid-1/Schemas/Schema.xsd" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://www.tibco.com/schemas/svcHousemaid-1/Schemas/Schema1.xsd" xmlns:ns3="http://www.tibco.com/pe/GenerateErrorActivity/InputSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:pfx="http://xmlns.example.com/1631092950463">
+    <xsd:import namespace="http://www.tibco.com/schemas/svcHousemaid-1/Schemas/Schema1.xsd" schemaLocation="/Schemas/Inquiry Data/TKIInfoRequest.xsd"/>
+    <xsd:import namespace="http://www.tibco.com/schemas/svcHousemaid-1/Schemas/Schema.xsd" schemaLocation="/Schemas/Inquiry Data/TKIInfoResponse.xsd"/>
+    <wsdl:import namespace="http://xmlns.example.com/1631092950463" location="/WSDLs/TKIWSDL.wsdl"/>
+    <pd:name>Processes/Inquiry Data/TKIDetails.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType wsMsgRef="pfx:InquiryTKIInput"/>
+    <pd:startX>130</pd:startX>
+    <pd:startY>63</pd:startY>
+    <pd:returnBindings>
+        <pfx:InquiryTKIOutput>
+            <Response>
+                <ns2:TKIDetails>
+                    <ns2:Info>
+                        <ns2:MessageCode>
+                            <xsl:value-of select="$dataResponVar/ns2:Info/ns2:MessageCode"/>
+                        </ns2:MessageCode>
+                        <ns2:Message>
+                            <xsl:value-of select="$dataResponVar/ns2:Info/ns2:Message"/>
+                        </ns2:Message>
+                    </ns2:Info>
+                    <ns2:TKIInfo>
+                        <ns2:Id>
+                            <xsl:value-of select="$Get-TKIDetails/resultSet/Record[1]/ID"/>
+                        </ns2:Id>
+                        <ns2:NIK>
+                            <xsl:value-of select="$Get-TKIDetails/resultSet/Record[1]/NIK"/>
+                        </ns2:NIK>
+                        <ns2:MaidCode>
+                            <xsl:value-of select="$Get-TKIDetails/resultSet/Record[1]/MAID_CODE"/>
+                        </ns2:MaidCode>
+                        <ns2:Name>
+                            <xsl:value-of select="$Get-TKIDetails/resultSet/Record[1]/NAMA"/>
+                        </ns2:Name>
+                        <ns2:TanggalLahir>
+                            <xsl:value-of select="$Get-TKIDetails/resultSet/Record[1]/TANGGAL_LAHIR"/>
+                        </ns2:TanggalLahir>
+                        <ns2:TempatLahir>
+                            <xsl:value-of select="$Get-TKIDetails/resultSet/Record[1]/TEMPAT_LAHIR"/>
+                        </ns2:TempatLahir>
+                        <ns2:Passport>
+                            <xsl:value-of select="$Get-TKIDetails/resultSet/Record[1]/PASSPORT"/>
+                        </ns2:Passport>
+                        <ns2:JenisKelamin>
+                            <xsl:value-of select="$Get-TKIDetails/resultSet/Record[1]/JENIS_KELAMIN"/>
+                        </ns2:JenisKelamin>
+                        <ns2:TinggiBadan>
+                            <xsl:value-of select="$Get-TKIDetails/resultSet/Record[1]/TINGGI_BADAN"/>
+                        </ns2:TinggiBadan>
+                        <ns2:BeratBadan>
+                            <xsl:value-of select="$Get-TKIDetails/resultSet/Record[1]/BERAT_BADAN"/>
+                        </ns2:BeratBadan>
+                        <ns2:Kewarganegaraan>
+                            <xsl:value-of select="$Get-TKIDetails/resultSet/Record[1]/KEWARGANEGARAAN"/>
+                        </ns2:Kewarganegaraan>
+                        <ns2:NegaraAsal>
+                            <xsl:value-of select="$Get-TKIDetails/resultSet/Record[1]/NEGARA_ASAL"/>
+                        </ns2:NegaraAsal>
+                        <ns2:Agama>
+                            <xsl:value-of select="$Get-TKIDetails/resultSet/Record[1]/AGAMA"/>
+                        </ns2:Agama>
+                        <ns2:JumlahSaudara>
+                            <xsl:value-of select="$Get-TKIDetails/resultSet/Record[1]/JML_SAUDARA"/>
+                        </ns2:JumlahSaudara>
+                        <ns2:AnakKe>
+                            <xsl:value-of select="$Get-TKIDetails/resultSet/Record[1]/ANAK_KE"/>
+                        </ns2:AnakKe>
+                        <ns2:StatusNikah>
+                            <xsl:value-of select="$Get-TKIDetails/resultSet/Record[1]/STATUS_NIKAH"/>
+                        </ns2:StatusNikah>
+                        <ns2:JumlahAnak>
+                            <xsl:value-of select="$Get-TKIDetails/resultSet/Record[1]/JML_ANAK"/>
+                        </ns2:JumlahAnak>
+                        <ns2:PendidikanTerakhir>
+                            <xsl:value-of select="$Get-TKIDetails/resultSet/Record[1]/PENDIDIKAN_TERAKHIR"/>
+                        </ns2:PendidikanTerakhir>
+                        <ns2:StatusApprove>
+                            <xsl:value-of select="$Get-TKIDetails/resultSet/Record[1]/APPROVE"/>
+                        </ns2:StatusApprove>
+                        <ns2:ApprovedBy>
+                            <xsl:value-of select="$Get-TKIDetails/resultSet/Record[1]/APPROVED_BY"/>
+                        </ns2:ApprovedBy>
+                        <ns2:ApprovedDate>
+                            <xsl:value-of select="$Get-TKIDetails/resultSet/Record[1]/APPROVED_DATE"/>
+                        </ns2:ApprovedDate>
+                        <ns2:Catatan>
+                            <xsl:value-of select="$Get-TKIDetails/resultSet/Record[1]/CATATAN"/>
+                        </ns2:Catatan>
+                        <ns2:IdGroup>
+                            <xsl:value-of select="$Get-TKIDetails/resultSet/Record[1]/ID_GROUP"/>
+                        </ns2:IdGroup>
+                    </ns2:TKIInfo>
+                </ns2:TKIDetails>
+            </Response>
+        </pfx:InquiryTKIOutput>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType wsMsgRef="pfx:InquiryTKIOutput"/>
+    <pd:endX>753</pd:endX>
+    <pd:endY>65</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables>
+        <dataResponVar ref="ns2:Info"/>
+    </pd:processVariables>
+    <pd:targetNamespace>http://xmlns.example.com/1631093891227</pd:targetNamespace>
+    <pd:activity name="Get TKIDetails">
+        <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
+        <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
+        <pd:x>338</pd:x>
+        <pd:y>62</pd:y>
+        <config>
+            <timeout>10</timeout>
+            <commit>false</commit>
+            <maxRows>100</maxRows>
+            <emptyStrAsNil>false</emptyStrAsNil>
+            <jdbcSharedConfig>/Connections/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+            <statement>SELECT a.ID, a.NIK, a.MAID_CODE, a.NAMA, a.PASSPORT, a.TEMPAT_LAHIR, a.TANGGAL_LAHIR, a.JENIS_KELAMIN, a.TINGGI_BADAN, a.BERAT_BADAN, a.KEWARGANEGARAAN,
+a.NEGARA_ASAL, a.AGAMA, a.JML_SAUDARA, a.ANAK_KE, a.STATUS_NIKAH, a.JML_ANAK, a.PENDIDIKAN_TERAKHIR, a.APPROVE, a.APPROVED_BY, a.APPROVED_DATE,
+a.CATATAN, a.ID_GROUP, a.CREATED_BY
+ FROM db_ctki.MST_TKI a 
+WHERE a.maid_code=?</statement>
+            <Prepared_Param_DataType>
+                <parameter>
+                    <parameterName>Maid_code</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+            </Prepared_Param_DataType>
+            <oraObjects/>
+            <oraTables/>
+            <QueryOutputCachedSchemaColumns>ID</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>NIK</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>MAID_CODE</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>NAMA</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>PASSPORT</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>TEMPAT_LAHIR</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>TANGGAL_LAHIR</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>93</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>DATE</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>JENIS_KELAMIN</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>TINGGI_BADAN</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>BERAT_BADAN</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>KEWARGANEGARAAN</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>NEGARA_ASAL</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>AGAMA</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>JML_SAUDARA</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>ANAK_KE</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>STATUS_NIKAH</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>JML_ANAK</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>PENDIDIKAN_TERAKHIR</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>APPROVE</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>APPROVED_BY</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>APPROVED_DATE</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>93</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>TIMESTAMP</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>CATATAN</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>-1</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>ID_GROUP</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>CREATED_BY</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+        </config>
+        <pd:inputBindings>
+            <jdbcQueryActivityInput>
+                <Maid_code>
+                    <xsl:value-of select="$Start/pfx:InquiryTKIInput/Request/ns:TKI/ns:Maid_code"/>
+                </Maid_code>
+            </jdbcQueryActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Assign">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:x>533</pd:x>
+        <pd:y>64</pd:y>
+        <config>
+            <variableName>dataResponVar</variableName>
+        </config>
+        <pd:inputBindings>
+            <ns2:Info>
+                <ns2:MessageCode>
+                    <xsl:value-of select="'200'"/>
+                </ns2:MessageCode>
+                <ns2:Message>
+                    <xsl:value-of select="'Success'"/>
+                </ns2:Message>
+            </ns2:Info>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Assign-1">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:x>535</pd:x>
+        <pd:y>166</pd:y>
+        <config>
+            <variableName>dataResponVar</variableName>
+        </config>
+        <pd:inputBindings>
+            <ns2:Info>
+                <ns2:MessageCode>
+                    <xsl:value-of select="'404'"/>
+                </ns2:MessageCode>
+                <ns2:Message>
+                    <xsl:value-of select="'Not Found'"/>
+                </ns2:Message>
+            </ns2:Info>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Catch">
+        <pd:type>com.tibco.pe.core.CatchActivity</pd:type>
+        <pd:resourceType>ae.activities.catch</pd:resourceType>
+        <pd:x>754</pd:x>
+        <pd:y>243</pd:y>
+        <pd:handler>true</pd:handler>
+        <config>
+            <catchAll>true</catchAll>
+        </config>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:activity name="Assign-2">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:x>881</pd:x>
+        <pd:y>150</pd:y>
+        <config>
+            <variableName>dataResponVar</variableName>
+        </config>
+        <pd:inputBindings>
+            <ns2:Info>
+                <ns2:MessageCode>
+                    <xsl:value-of select="'99'"/>
+                </ns2:MessageCode>
+                <ns2:Message>
+                    <xsl:value-of select="$Catch/exceptiondata/*"/>
+                </ns2:Message>
+            </ns2:Info>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>Get TKIDetails</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Get TKIDetails</pd:from>
+        <pd:to>Assign</pd:to>
+        <pd:xpathDescription>Exist</pd:xpathDescription>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>exists($Get-TKIDetails/resultSet/Record/ID)</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Assign</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Get TKIDetails</pd:from>
+        <pd:to>Assign-1</pd:to>
+        <pd:xpathDescription>Otherwise</pd:xpathDescription>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>otherwise</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Assign-1</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Catch</pd:from>
+        <pd:to>Assign-2</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Assign-2</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

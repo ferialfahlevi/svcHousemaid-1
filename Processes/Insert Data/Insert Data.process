@@ -1,0 +1,844 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns1="http://schemas.tibco.com/bw/plugins/jdbc/5.0/jdbcExceptions" xmlns:ns="http://www.tibco.com/schemas/svcHousemaid-1/Schemas/Insert Data/Schema.xsd" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions" xmlns:pfx2="http://www.tibco.com/schemas/svcHousemaid-1/Schemas/Insert Data/Schema1.xsd" xmlns:pfx="http://xmlns.example.com/1631092950463" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <xsd:import namespace="http://www.tibco.com/schemas/svcHousemaid-1/Schemas/Insert Data/Schema1.xsd" schemaLocation="/Schemas/Insert Data/Insert TKI/InsertTKIResponse.xsd"/>
+    <xsd:import namespace="http://www.tibco.com/schemas/svcHousemaid-1/Schemas/Insert Data/Schema.xsd" schemaLocation="/Schemas/Insert Data/Insert TKI/InsertTKIRequest.xsd"/>
+    <wsdl:import namespace="http://xmlns.example.com/1631092950463" location="/WSDLs/TKIWSDL.wsdl"/>
+    <pd:name>Processes/Insert Data/Insert Data.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType wsMsgRef="pfx:InsertTKIInput"/>
+    <pd:startX>82</pd:startX>
+    <pd:startY>62</pd:startY>
+    <pd:returnBindings>
+        <pfx:InsertTKIOutput>
+            <Response>
+                <pfx2:InsertTKIResponse>
+                    <pfx2:Info>
+                        <pfx2:ID>
+                            <xsl:value-of select="$dataResponVar/group/pfx2:Info/pfx2:ID"/>
+                        </pfx2:ID>
+                        <pfx2:MessageCode>
+                            <xsl:value-of select="$dataResponVar/group/pfx2:Info/pfx2:MessageCode"/>
+                        </pfx2:MessageCode>
+                        <pfx2:Message>
+                            <xsl:value-of select="$dataResponVar/group/pfx2:Info/pfx2:Message"/>
+                        </pfx2:Message>
+                    </pfx2:Info>
+                    <pfx2:TKIName>
+                        <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:Name"/>
+                    </pfx2:TKIName>
+                </pfx2:InsertTKIResponse>
+            </Response>
+        </pfx:InsertTKIOutput>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType wsMsgRef="pfx:InsertTKIOutput"/>
+    <pd:endX>812</pd:endX>
+    <pd:endY>67</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables>
+        <dataResponVar>
+            <xsd:element name="group">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element ref="pfx2:Info"/>
+                        <xsd:element name="param" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </dataResponVar>
+    </pd:processVariables>
+    <pd:targetNamespace>http://xmlns.example.com/1631653273793</pd:targetNamespace>
+    <pd:activity name="Check NIK Exist">
+        <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
+        <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
+        <pd:x>257</pd:x>
+        <pd:y>62</pd:y>
+        <config>
+            <timeout>10</timeout>
+            <commit>false</commit>
+            <maxRows>100</maxRows>
+            <emptyStrAsNil>false</emptyStrAsNil>
+            <statement>select 1 from db_ctki.mst_tki a where a.NIK=?</statement>
+            <jdbcSharedConfig>/Connections/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+            <Prepared_Param_DataType>
+                <parameter>
+                    <parameterName>nik</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+            </Prepared_Param_DataType>
+            <oraObjects/>
+            <oraTables/>
+            <QueryOutputCachedSchemaColumns>_1</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>-5</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>BIGINT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+        </config>
+        <pd:inputBindings>
+            <jdbcQueryActivityInput>
+                <nik>
+                    <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:Nik"/>
+                </nik>
+            </jdbcQueryActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Success">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:x>816</pd:x>
+        <pd:y>598</pd:y>
+        <config>
+            <variableName>dataResponVar</variableName>
+        </config>
+        <pd:inputBindings>
+            <group>
+                <pfx2:Info>
+                    <pfx2:ID>
+                        <xsl:value-of select="$dataResponVar/group/pfx2:Info/pfx2:ID"/>
+                    </pfx2:ID>
+                    <pfx2:MessageCode>
+                        <xsl:value-of select="'01'"/>
+                    </pfx2:MessageCode>
+                    <pfx2:Message>
+                        <xsl:value-of select="'Successfully Registered TKI'"/>
+                    </pfx2:Message>
+                </pfx2:Info>
+                <param>
+                    <xsl:value-of select="'14'"/>
+                </param>
+            </group>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="NIK Exist">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:x>431</pd:x>
+        <pd:y>64</pd:y>
+        <config>
+            <variableName>dataResponVar</variableName>
+        </config>
+        <pd:inputBindings>
+            <group>
+                <pfx2:Info>
+                    <pfx2:ID>
+                        <xsl:value-of select="''"/>
+                    </pfx2:ID>
+                    <pfx2:MessageCode>
+                        <xsl:value-of select="'02'"/>
+                    </pfx2:MessageCode>
+                    <pfx2:Message>
+                        <xsl:value-of select="'NIK Already Exist'"/>
+                    </pfx2:Message>
+                </pfx2:Info>
+                <param>
+                    <xsl:value-of select="'INSERT'"/>
+                </param>
+            </group>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Call Process">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>817</pd:x>
+        <pd:y>414</pd:y>
+        <config>
+            <processName>/Processes/Logger/Logger.process</processName>
+        </config>
+        <pd:inputBindings>
+            <LOG_ACTIVITY>
+                <JENIS>
+                    <xsl:value-of select="$dataResponVar/group/param"/>
+                </JENIS>
+                <CODE>
+                    <xsl:value-of select="$dataResponVar/group/pfx2:Info/pfx2:ID"/>
+                </CODE>
+                <AKSI>
+                    <xsl:value-of select="'INSERT'"/>
+                </AKSI>
+                <CATATAN>
+                    <xsl:value-of select="concat($Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:Name, ' ', current-dateTime())"/>
+                </CATATAN>
+                <ID_USER>
+                    <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:CreatedBy"/>
+                </ID_USER>
+            </LOG_ACTIVITY>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Set ID">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:x>154</pd:x>
+        <pd:y>221</pd:y>
+        <config>
+            <variableName>dataResponVar</variableName>
+        </config>
+        <pd:inputBindings>
+            <group>
+                <pfx2:Info>
+                    <pfx2:ID>
+                        <xsl:value-of select="substring(tib:timestamp(), 0, 12)"/>
+                    </pfx2:ID>
+                    <pfx2:MessageCode>
+                        <xsl:value-of select="''"/>
+                    </pfx2:MessageCode>
+                    <pfx2:Message>
+                        <xsl:value-of select="''"/>
+                    </pfx2:Message>
+                </pfx2:Info>
+                <param>
+                    <xsl:value-of select="'14'"/>
+                </param>
+            </group>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Catch">
+        <pd:type>com.tibco.pe.core.CatchActivity</pd:type>
+        <pd:resourceType>ae.activities.catch</pd:resourceType>
+        <pd:x>1092</pd:x>
+        <pd:y>274</pd:y>
+        <pd:handler>true</pd:handler>
+        <config>
+            <fault>localname=JDBCSQLException namespace=http://schemas.tibco.com/bw/plugins/jdbc/5.0/jdbcExceptions</fault>
+        </config>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:activity name="Call-Process-1">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>955</pd:x>
+        <pd:y>276</pd:y>
+        <config>
+            <processName>/Processes/Logger/Logger.process</processName>
+        </config>
+        <pd:inputBindings>
+            <LOG_ACTIVITY>
+                <JENIS>
+                    <xsl:value-of select="$dataResponVar/group/pfx2:Info/pfx2:ID"/>
+                </JENIS>
+                <CODE>
+                    <xsl:value-of select="'-'"/>
+                </CODE>
+                <AKSI>
+                    <xsl:value-of select="'INSERT'"/>
+                </AKSI>
+                <CATATAN>
+                    <xsl:value-of select="concat($Catch/ns1:JDBCSQLException/msgCode, ' | ', &#xA;$Catch/ns1:JDBCSQLException/msg, ' | ', &#xA;$Catch/ns1:JDBCSQLException/sqlState, ' | ', $Catch/ns1:JDBCSQLException/detailStr)"/>
+                </CATATAN>
+                <ID_USER>
+                    <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:CreatedBy"/>
+                </ID_USER>
+            </LOG_ACTIVITY>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Assign">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:x>958</pd:x>
+        <pd:y>69</pd:y>
+        <config>
+            <variableName>dataResponVar</variableName>
+        </config>
+        <pd:inputBindings>
+            <group>
+                <pfx2:Info>
+                    <pfx2:ID>
+                        <xsl:value-of select="'-'"/>
+                    </pfx2:ID>
+                    <pfx2:MessageCode>
+                        <xsl:value-of select="'99'"/>
+                    </pfx2:MessageCode>
+                    <pfx2:Message>
+                        <xsl:value-of select="$Catch/ns1:JDBCSQLException/msg"/>
+                    </pfx2:Message>
+                </pfx2:Info>
+                <param>
+                    <xsl:value-of select="'14'"/>
+                </param>
+            </group>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:group name="Group">
+        <pd:type>com.tibco.pe.core.TransactionGroup</pd:type>
+        <pd:resourceType>ae.process.group</pd:resourceType>
+        <pd:x>18</pd:x>
+        <pd:y>498</pd:y>
+        <pd:width>308</pd:width>
+        <pd:height>173</pd:height>
+        <pd:collapsedWidth>57</pd:collapsedWidth>
+        <pd:collapsedHeight>70</pd:collapsedHeight>
+        <pd:groupVariables/>
+        <pd:joinToggle>inherit</pd:joinToggle>
+        <config>
+            <pd:groupType>transactionGroup</pd:groupType>
+            <pd:serializable>false</pd:serializable>
+            <pd:transactionType>JDBCTransaction</pd:transactionType>
+            <pd:includeCheckpoint>false</pd:includeCheckpoint>
+        </config>
+        <pd:inputBindings/>
+        <pd:expanded>true</pd:expanded>
+        <pd:transition>
+            <pd:from>start</pd:from>
+            <pd:to>Insert TKI</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
+        <pd:transition>
+            <pd:from>Insert Alamat</pd:from>
+            <pd:to>end</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
+        <pd:transition>
+            <pd:from>Insert TKI</pd:from>
+            <pd:to>Insert Alamat</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
+        <pd:activity name="Insert TKI">
+            <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
+            <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
+            <pd:x>116</pd:x>
+            <pd:y>591</pd:y>
+            <config>
+                <timeout>10</timeout>
+                <commit>false</commit>
+                <emptyStrAsNil>false</emptyStrAsNil>
+                <statement>insert into db_ctki.mst_tki (ID,NIK, MAID_CODE, NAMA, PASSPORT, TEMPAT_LAHIR, TANGGAL_LAHIR, JENIS_KELAMIN, TINGGI_BADAN, BERAT_BADAN, KEWARGANEGARAAN, NEGARA_ASAL, AGAMA, JML_SAUDARA, ANAK_KE, STATUS_NIKAH, JML_ANAK, PENDIDIKAN_TERAKHIR, CATATAN, ID_GROUP, CREATED_BY) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)</statement>
+                <jdbcSharedConfig>/Connections/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+                <Prepared_Param_DataType>
+                    <parameter>
+                        <parameterName>ID</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>NIK</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>MAID_CODE</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>NAMA</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>PASSPORT</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>TEMPAT_LAHIR</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>TANGGAL_LAHIR</parameterName>
+                        <dataType>DATE</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>JENIS_KELAMIN</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>TINGGI_BADAN</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>BERAT_BADAN</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>KEWARGANEGARAAN</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>NEGARA_ASAL</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>AGAMA</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>JML_SAUDARA</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>ANAK_KE</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>STATUS_NIKAH</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>JML_ANAK</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>PENDIDIKAN_TERAKHIR</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>CATATAN</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>ID_GROUP</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>CREATED_BY</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                </Prepared_Param_DataType>
+            </config>
+            <pd:inputBindings>
+                <jdbcUpdateActivityInput>
+                    <ID>
+                        <xsl:value-of select="$dataResponVar/group/pfx2:Info/pfx2:ID"/>
+                    </ID>
+                    <NIK>
+                        <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:Nik"/>
+                    </NIK>
+                    <MAID_CODE>
+                        <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:MaidCode"/>
+                    </MAID_CODE>
+                    <NAMA>
+                        <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:Name"/>
+                    </NAMA>
+                    <PASSPORT>
+                        <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:Passport"/>
+                    </PASSPORT>
+                    <TEMPAT_LAHIR>
+                        <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:TempatLahir"/>
+                    </TEMPAT_LAHIR>
+                    <TANGGAL_LAHIR>
+                        <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:TanggalLahir"/>
+                    </TANGGAL_LAHIR>
+                    <JENIS_KELAMIN>
+                        <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:JenisKelamin"/>
+                    </JENIS_KELAMIN>
+                    <TINGGI_BADAN>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:TinggiBadan)">
+                                <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:TinggiBadan"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </TINGGI_BADAN>
+                    <BERAT_BADAN>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:BeratBadan)">
+                                <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:BeratBadan"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </BERAT_BADAN>
+                    <KEWARGANEGARAAN>
+                        <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:Kewarganegaraan"/>
+                    </KEWARGANEGARAAN>
+                    <NEGARA_ASAL>
+                        <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:NegaraAsal"/>
+                    </NEGARA_ASAL>
+                    <AGAMA>
+                        <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:Agama"/>
+                    </AGAMA>
+                    <JML_SAUDARA>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:JmlSaudara)">
+                                <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:JmlSaudara"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </JML_SAUDARA>
+                    <ANAK_KE>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:AnakKe)">
+                                <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:AnakKe"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </ANAK_KE>
+                    <STATUS_NIKAH>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:StatusNikah)">
+                                <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:StatusNikah"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </STATUS_NIKAH>
+                    <JML_ANAK>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:JmlAnak)">
+                                <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:JmlAnak"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </JML_ANAK>
+                    <PENDIDIKAN_TERAKHIR>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:PendidikanTerakhir)">
+                                <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:PendidikanTerakhir"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </PENDIDIKAN_TERAKHIR>
+                    <CATATAN>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:Catatan)">
+                                <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:Catatan"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </CATATAN>
+                    <ID_GROUP>
+                        <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:IDGroup"/>
+                    </ID_GROUP>
+                    <CREATED_BY>
+                        <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:CreatedBy"/>
+                    </CREATED_BY>
+                </jdbcUpdateActivityInput>
+            </pd:inputBindings>
+        </pd:activity>
+        <pd:activity name="Insert Alamat">
+            <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
+            <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
+            <pd:x>210</pd:x>
+            <pd:y>590</pd:y>
+            <config>
+                <timeout>10</timeout>
+                <commit>false</commit>
+                <emptyStrAsNil>false</emptyStrAsNil>
+                <jdbcSharedConfig>/Connections/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+                <statement>insert into db_ctki.alamat (ID, ID_TKI, JENIS_ALAMAT, JALAN, RT, RW, KECAMATAN, KELURAHAN, KOTA, KD_POS, PROVINSI, DESA, STATUS, CREATED_BY) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)</statement>
+                <Prepared_Param_DataType>
+                    <parameter>
+                        <parameterName>ID</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>ID_TKI</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>JENIS_ALAMAT</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>JALAN</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>RT</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>RW</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>KECAMATAN</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>KELURAHAN</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>KOTA</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>KD_POS</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>PROVINSI</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>DESA</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>STATUS</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>CREATED_BY</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                </Prepared_Param_DataType>
+            </config>
+            <pd:inputBindings>
+                <jdbcUpdateActivityInput>
+                    <ID>
+                        <xsl:value-of select="substring(tib:timestamp(), 0, 12)"/>
+                    </ID>
+                    <ID_TKI>
+                        <xsl:value-of select="$dataResponVar/group/pfx2:Info/pfx2:ID"/>
+                    </ID_TKI>
+                    <JENIS_ALAMAT>
+                        <xsl:value-of select="'1'"/>
+                    </JENIS_ALAMAT>
+                    <JALAN>
+                        <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIAlamat/ns:Jalan"/>
+                    </JALAN>
+                    <RT>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIAlamat/ns:RT)">
+                                <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIAlamat/ns:RT"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </RT>
+                    <RW>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIAlamat/ns:RW)">
+                                <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIAlamat/ns:RW"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </RW>
+                    <KECAMATAN>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIAlamat/ns:Kecamatan)">
+                                <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIAlamat/ns:Kecamatan"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </KECAMATAN>
+                    <KELURAHAN>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIAlamat/ns:Kelurahan)">
+                                <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIAlamat/ns:Kelurahan"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </KELURAHAN>
+                    <KOTA>
+                        <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIAlamat/ns:Kota"/>
+                    </KOTA>
+                    <KD_POS>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIAlamat/ns:KdPos)">
+                                <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIAlamat/ns:KdPos"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </KD_POS>
+                    <PROVINSI>
+                        <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIAlamat/ns:Provinsi"/>
+                    </PROVINSI>
+                    <DESA>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIAlamat/ns:Desa)">
+                                <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIAlamat/ns:Desa"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </DESA>
+                    <STATUS>
+                        <xsl:value-of select="'1'"/>
+                    </STATUS>
+                    <CREATED_BY>
+                        <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:CreatedBy"/>
+                    </CREATED_BY>
+                </jdbcUpdateActivityInput>
+            </pd:inputBindings>
+        </pd:activity>
+    </pd:group>
+    <pd:activity name="Check Company">
+        <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
+        <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
+        <pd:x>259</pd:x>
+        <pd:y>221</pd:y>
+        <config>
+            <timeout>10</timeout>
+            <commit>false</commit>
+            <maxRows>100</maxRows>
+            <emptyStrAsNil>false</emptyStrAsNil>
+            <jdbcSharedConfig>/Connections/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+            <statement>select STATUS from db_ctki.MST_PERUSAHAAN where id = (select ID_PERUSAHAAN from db_ctki.MST_GROUP where ID = ?)</statement>
+            <Prepared_Param_DataType>
+                <parameter>
+                    <parameterName>IdGroup</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+            </Prepared_Param_DataType>
+            <oraObjects/>
+            <oraTables/>
+            <QueryOutputCachedSchemaColumns>STATUS</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+        </config>
+        <pd:inputBindings>
+            <jdbcQueryActivityInput>
+                <IdGroup>
+                    <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:IDGroup"/>
+                </IdGroup>
+            </jdbcQueryActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Not Exist or Active">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:x>430</pd:x>
+        <pd:y>229</pd:y>
+        <config>
+            <variableName>dataResponVar</variableName>
+        </config>
+        <pd:inputBindings>
+            <group>
+                <pfx2:Info>
+                    <pfx2:ID>
+                        <xsl:value-of select="''"/>
+                    </pfx2:ID>
+                    <pfx2:MessageCode>
+                        <xsl:value-of select="'03'"/>
+                    </pfx2:MessageCode>
+                    <pfx2:Message>
+                        <xsl:value-of select="'Company Is Not Active Or Doesnt Exist'"/>
+                    </pfx2:Message>
+                </pfx2:Info>
+                <param>
+                    <xsl:value-of select="'INSERT'"/>
+                </param>
+            </group>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>Check NIK Exist</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Check NIK Exist</pd:from>
+        <pd:to>NIK Exist</pd:to>
+        <pd:xpathDescription>Otherwise</pd:xpathDescription>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>$Check-NIK-Exist/resultSet/Record/_1='1'</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Check NIK Exist</pd:from>
+        <pd:to>Check Company</pd:to>
+        <pd:xpathDescription>If Not Exist</pd:xpathDescription>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>otherwise</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>NIK Exist</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>One Bend</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Success</pd:from>
+        <pd:to>Call Process</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Call Process</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>One Bend</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Catch</pd:from>
+        <pd:to>Call-Process-1</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Call-Process-1</pd:from>
+        <pd:to>Assign</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Assign</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Set ID</pd:from>
+        <pd:to>Group</pd:to>
+        <pd:lineType>One Bend</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Group</pd:from>
+        <pd:to>Success</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Check Company</pd:from>
+        <pd:to>Not Exist or Active</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>otherwise</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Not Exist or Active</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Check Company</pd:from>
+        <pd:to>Set ID</pd:to>
+        <pd:xpathDescription>Available</pd:xpathDescription>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>exists($Check-Company/resultSet/Record/STATUS) and $Check-Company/resultSet/Record/STATUS = '1'</pd:xpath>
+    </pd:transition>
+</pd:ProcessDefinition>

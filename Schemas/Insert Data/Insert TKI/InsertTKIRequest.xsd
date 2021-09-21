@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="http://www.tibco.com/schemas/svcHousemaid-1/Schemas/Insert Data/Schema.xsd"
+	 targetNamespace="http://www.tibco.com/schemas/svcHousemaid-1/Schemas/Insert Data/Schema.xsd"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:element name="TKIInfo">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Nik"/>
+				<xs:element ref="MaidCode"/>
+				<xs:element ref="Name"/>
+				<xs:element ref="Passport"/>
+				<xs:element ref="TempatLahir"/>
+				<xs:element ref="TanggalLahir"/>
+				<xs:element ref="JenisKelamin"/>
+				<xs:element ref="TinggiBadan" minOccurs="0"/>
+				<xs:element ref="BeratBadan" minOccurs="0"/>
+				<xs:element ref="Kewarganegaraan"/>
+				<xs:element ref="NegaraAsal"/>
+				<xs:element ref="Agama"/>
+				<xs:element ref="JmlSaudara" minOccurs="0"/>
+				<xs:element ref="AnakKe" minOccurs="0"/>
+				<xs:element ref="StatusNikah" minOccurs="0"/>
+				<xs:element ref="JmlAnak" minOccurs="0"/>
+				<xs:element ref="PendidikanTerakhir" minOccurs="0"/>
+				<xs:element ref="Catatan" minOccurs="0"/>
+				<xs:element ref="IDGroup"/>
+				<xs:element ref="CreatedBy"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Nik" type="xs:string"/>
+	<xs:element name="MaidCode" type="xs:string"/>
+	<xs:element name="Name" type="xs:string"/>
+	<xs:element name="Passport" type="xs:string"/>
+	<xs:element name="TempatLahir" type="xs:string"/>
+	<xs:element name="TanggalLahir" type="xs:string"/>
+	<xs:element name="JenisKelamin" type="xs:string"/>
+	<xs:element name="TinggiBadan" type="xs:string"/>
+	<xs:element name="BeratBadan" type="xs:string"/>
+	<xs:element name="Kewarganegaraan" type="xs:string"/>
+	<xs:element name="NegaraAsal" type="xs:string"/>
+	<xs:element name="Agama" type="xs:string"/>
+	<xs:element name="JmlSaudara" type="xs:string"/>
+	<xs:element name="AnakKe" type="xs:string"/>
+	<xs:element name="StatusNikah" type="xs:string"/>
+	<xs:element name="JmlAnak" type="xs:string"/>
+	<xs:element name="PendidikanTerakhir" type="xs:string"/>
+	<xs:element name="Catatan" type="xs:string"/>
+	<xs:element name="IDGroup" type="xs:string"/>
+	<xs:element name="CreatedBy" type="xs:string"/>
+	<xs:element name="InsertTKIRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="TKIInfo"/>
+				<xs:element ref="TKIAlamat"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TKIAlamat">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Jalan"/>
+				<xs:element ref="RT" minOccurs="0"/>
+				<xs:element ref="RW" minOccurs="0"/>
+				<xs:element ref="Kecamatan" minOccurs="0"/>
+				<xs:element ref="Kelurahan" minOccurs="0"/>
+				<xs:element ref="Kota"/>
+				<xs:element ref="KdPos" minOccurs="0"/>
+				<xs:element ref="Provinsi"/>
+				<xs:element ref="Desa" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Jalan" type="xs:string"/>
+	<xs:element name="RT" type="xs:string"/>
+	<xs:element name="RW" type="xs:string"/>
+	<xs:element name="Kecamatan" type="xs:string"/>
+	<xs:element name="Kelurahan" type="xs:string"/>
+	<xs:element name="Kota" type="xs:string"/>
+	<xs:element name="KdPos" type="xs:string"/>
+	<xs:element name="Provinsi" type="xs:string"/>
+	<xs:element name="Desa" type="xs:string"/>
+</xs:schema>

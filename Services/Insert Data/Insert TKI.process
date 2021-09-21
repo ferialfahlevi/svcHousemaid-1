@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns1="http://www.tibco.com/schemas/svcHousemaid-1/Schemas/Insert Data/Schema1.xsd" xmlns:ns="http://www.tibco.com/schemas/svcHousemaid-1/Schemas/Insert Data/Schema.xsd" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pfx="http://xmlns.example.com/1631092950463">
+    <wsdl:import namespace="http://xmlns.example.com/1631092950463" location="/WSDLs/TKIWSDL.wsdl"/>
+    <pd:name>Services/Insert Data/Insert TKI.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType wsMsgRef="pfx:InsertTKIInput"/>
+    <pd:startX>150</pd:startX>
+    <pd:startY>64</pd:startY>
+    <pd:returnBindings>
+        <pfx:InsertTKIOutput>
+            <Response>
+                <ns1:InsertTKIResponse>
+                    <ns1:Info>
+                        <ns1:ID>
+                            <xsl:value-of select="$Call-Process/pfx:InsertTKIOutput/Response/ns1:InsertTKIResponse/ns1:Info/ns1:ID"/>
+                        </ns1:ID>
+                        <ns1:MessageCode>
+                            <xsl:value-of select="$Call-Process/pfx:InsertTKIOutput/Response/ns1:InsertTKIResponse/ns1:Info/ns1:MessageCode"/>
+                        </ns1:MessageCode>
+                        <ns1:Message>
+                            <xsl:value-of select="$Call-Process/pfx:InsertTKIOutput/Response/ns1:InsertTKIResponse/ns1:Info/ns1:Message"/>
+                        </ns1:Message>
+                    </ns1:Info>
+                    <ns1:TKIName>
+                        <xsl:value-of select="$Call-Process/pfx:InsertTKIOutput/Response/ns1:InsertTKIResponse/ns1:TKIName"/>
+                    </ns1:TKIName>
+                </ns1:InsertTKIResponse>
+            </Response>
+        </pfx:InsertTKIOutput>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType wsMsgRef="pfx:InsertTKIOutput"/>
+    <pd:endX>450</pd:endX>
+    <pd:endY>63</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1631652136447</pd:targetNamespace>
+    <pd:activity name="Call Process">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>299</pd:x>
+        <pd:y>65</pd:y>
+        <config>
+            <processName>/Processes/Insert Data/Insert Data.process</processName>
+        </config>
+        <pd:inputBindings>
+            <pfx:InsertTKIInput>
+                <Request>
+                    <ns:InsertTKIRequest>
+                        <ns:TKIInfo>
+                            <ns:Nik>
+                                <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:Nik"/>
+                            </ns:Nik>
+                            <ns:MaidCode>
+                                <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:MaidCode"/>
+                            </ns:MaidCode>
+                            <ns:Name>
+                                <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:Name"/>
+                            </ns:Name>
+                            <ns:Passport>
+                                <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:Passport"/>
+                            </ns:Passport>
+                            <ns:TempatLahir>
+                                <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:TempatLahir"/>
+                            </ns:TempatLahir>
+                            <ns:TanggalLahir>
+                                <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:TanggalLahir"/>
+                            </ns:TanggalLahir>
+                            <ns:JenisKelamin>
+                                <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:JenisKelamin"/>
+                            </ns:JenisKelamin>
+                            <ns:TinggiBadan>
+                                <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:TinggiBadan"/>
+                            </ns:TinggiBadan>
+                            <ns:BeratBadan>
+                                <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:BeratBadan"/>
+                            </ns:BeratBadan>
+                            <ns:Kewarganegaraan>
+                                <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:Kewarganegaraan"/>
+                            </ns:Kewarganegaraan>
+                            <ns:NegaraAsal>
+                                <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:NegaraAsal"/>
+                            </ns:NegaraAsal>
+                            <ns:Agama>
+                                <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:Agama"/>
+                            </ns:Agama>
+                            <ns:JmlSaudara>
+                                <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:JmlSaudara"/>
+                            </ns:JmlSaudara>
+                            <ns:AnakKe>
+                                <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:AnakKe"/>
+                            </ns:AnakKe>
+                            <ns:StatusNikah>
+                                <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:StatusNikah"/>
+                            </ns:StatusNikah>
+                            <ns:JmlAnak>
+                                <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:JmlAnak"/>
+                            </ns:JmlAnak>
+                            <ns:PendidikanTerakhir>
+                                <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:PendidikanTerakhir"/>
+                            </ns:PendidikanTerakhir>
+                            <ns:Catatan>
+                                <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:Catatan"/>
+                            </ns:Catatan>
+                            <ns:IDGroup>
+                                <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:IDGroup"/>
+                            </ns:IDGroup>
+                            <ns:CreatedBy>
+                                <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIInfo/ns:CreatedBy"/>
+                            </ns:CreatedBy>
+                        </ns:TKIInfo>
+                        <ns:TKIAlamat>
+                            <ns:Jalan>
+                                <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIAlamat/ns:Jalan"/>
+                            </ns:Jalan>
+                            <xsl:if test="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIAlamat/ns:RT">
+                                <ns:RT>
+                                    <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIAlamat/ns:RT"/>
+                                </ns:RT>
+                            </xsl:if>
+                            <xsl:if test="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIAlamat/ns:RW">
+                                <ns:RW>
+                                    <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIAlamat/ns:RW"/>
+                                </ns:RW>
+                            </xsl:if>
+                            <xsl:if test="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIAlamat/ns:Kecamatan">
+                                <ns:Kecamatan>
+                                    <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIAlamat/ns:Kecamatan"/>
+                                </ns:Kecamatan>
+                            </xsl:if>
+                            <xsl:if test="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIAlamat/ns:Kelurahan">
+                                <ns:Kelurahan>
+                                    <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIAlamat/ns:Kelurahan"/>
+                                </ns:Kelurahan>
+                            </xsl:if>
+                            <ns:Kota>
+                                <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIAlamat/ns:Kota"/>
+                            </ns:Kota>
+                            <xsl:if test="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIAlamat/ns:KdPos">
+                                <ns:KdPos>
+                                    <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIAlamat/ns:KdPos"/>
+                                </ns:KdPos>
+                            </xsl:if>
+                            <ns:Provinsi>
+                                <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIAlamat/ns:Provinsi"/>
+                            </ns:Provinsi>
+                            <xsl:if test="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIAlamat/ns:Desa">
+                                <ns:Desa>
+                                    <xsl:value-of select="$Start/pfx:InsertTKIInput/Request/ns:InsertTKIRequest/ns:TKIAlamat/ns:Desa"/>
+                                </ns:Desa>
+                            </xsl:if>
+                        </ns:TKIAlamat>
+                    </ns:InsertTKIRequest>
+                </Request>
+            </pfx:InsertTKIInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>Call Process</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Call Process</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>
